@@ -1,0 +1,30 @@
+# just in case and for reference:
+./run.sh terraform state pull > out.state
+
+# run apply but cancel, and note destroys and creates, map to mv commands like so:
+
+# staging mig
+./run.sh terraform state mv 'module.nox-staging.google_project_iam_member.bigqueryreader_bindings["roles/bigquery.dataViewer"]' 'module.nox-staging-specific.google_project_iam_member.bigqueryreader_bindings["roles/bigquery.dataViewer"]'
+./run.sh terraform state mv 'module.nox-staging.google_project_iam_member.bigqueryreader_bindings["roles/bigquery.jobUser"]' 'module.nox-staging-specific.google_project_iam_member.bigqueryreader_bindings["roles/bigquery.jobUser"]'
+./run.sh terraform state mv 'module.nox-staging.google_project_iam_member.bigqueryreader_bindings["roles/bigquery.metadataViewer"]' 'module.nox-staging-specific.google_project_iam_member.bigqueryreader_bindings["roles/bigquery.metadataViewer"]'
+./run.sh terraform state mv 'module.nox-staging.google_project_iam_member.dbt-sa-bindings["roles/bigquery.dataEditor"]' 'module.nox-staging-specific.google_project_iam_member.dbt-sa-bindings["roles/bigquery.dataEditor"]'
+./run.sh terraform state mv 'module.nox-staging.google_project_iam_member.dbt-sa-bindings["roles/bigquery.user"]' 'module.nox-staging-specific.google_project_iam_member.dbt-sa-bindings["roles/bigquery.user"]'
+./run.sh terraform state mv 'module.nox-staging.google_service_account.bigqueryreader' 'module.nox-staging-specific.google_service_account.bigqueryreader'
+./run.sh terraform state mv 'module.nox-staging.google_service_account.dbt-sa' 'module.nox-staging-specific.google_service_account.dbt-sa'
+./run.sh terraform state mv 'module.nox-staging.google_service_account_key.bigqueryreader' 'module.nox-staging-specific.google_service_account_key.bigqueryreader'
+./run.sh terraform state mv 'module.nox-staging.google_service_account_key.dbt-sa' 'module.nox-staging-specific.google_service_account_key.dbt-sa'
+./run.sh terraform state mv 'module.nox-staging.google_storage_bucket.uploads' 'module.nox-staging-specific.google_storage_bucket.uploads'
+
+# prod mig
+./run.sh terraform state mv 'module.nox-prod.google_project_iam_member.bigqueryreader_bindings["roles/bigquery.dataViewer"]' 'module.nox-prod-specific.google_project_iam_member.bigqueryreader_bindings["roles/bigquery.dataViewer"]'
+./run.sh terraform state mv 'module.nox-prod.google_project_iam_member.bigqueryreader_bindings["roles/bigquery.jobUser"]' 'module.nox-prod-specific.google_project_iam_member.bigqueryreader_bindings["roles/bigquery.jobUser"]'
+./run.sh terraform state mv 'module.nox-prod.google_project_iam_member.bigqueryreader_bindings["roles/bigquery.metadataViewer"]' 'module.nox-prod-specific.google_project_iam_member.bigqueryreader_bindings["roles/bigquery.metadataViewer"]'
+./run.sh terraform state mv 'module.nox-prod.google_project_iam_member.dbt-sa-bindings["roles/bigquery.dataEditor"]' 'module.nox-prod-specific.google_project_iam_member.dbt-sa-bindings["roles/bigquery.dataEditor"]'
+./run.sh terraform state mv 'module.nox-prod.google_project_iam_member.dbt-sa-bindings["roles/bigquery.user"]' 'module.nox-prod-specific.google_project_iam_member.dbt-sa-bindings["roles/bigquery.user"]'
+./run.sh terraform state mv 'module.nox-prod.google_service_account.bigqueryreader' 'module.nox-prod-specific.google_service_account.bigqueryreader'
+./run.sh terraform state mv 'module.nox-prod.google_service_account.dbt-sa' 'module.nox-prod-specific.google_service_account.dbt-sa'
+./run.sh terraform state mv 'module.nox-prod.google_service_account_key.bigqueryreader' 'module.nox-prod-specific.google_service_account_key.bigqueryreader'
+./run.sh terraform state mv 'module.nox-prod.google_service_account_key.dbt-sa' 'module.nox-prod-specific.google_service_account_key.dbt-sa'
+./run.sh terraform state mv 'module.nox-prod.google_storage_bucket.uploads' 'module.nox-prod-specific.google_storage_bucket.uploads'
+
+# run apply and check the plan
